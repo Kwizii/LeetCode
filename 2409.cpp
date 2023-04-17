@@ -38,6 +38,7 @@ public:
 };
 
 int main() {
+
     cout << Solution().toDay("08-15");
     return 0;
 }
