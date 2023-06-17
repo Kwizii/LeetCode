@@ -19,22 +19,22 @@ using namespace std;
 class Solution {
 public:
     int maxArea(vector<int> &height) {
-        int maxArea = 0;
+        int m = 0;
         int i = 0, j = height.size() - 1;
-        while (j > i) {
-            int area = min(height[i], height[j]) * (j - i);
-            maxArea = max(area, maxArea);
-            if (height[i] < height[j]) {
+        while (i < j) {
+            int cur = (j - i) * min(height[i], height[j]);
+            m = max(m, cur);
+            if (height[i] <= height[j])
                 i++;
-            } else {
+            else
                 j--;
-            }
         }
-        return maxArea;
+        return m;
     }
 };
 
 int main() {
-
+    vector<int> h{1, 8, 6, 2, 5, 4, 8, 3, 7};
+    cout << Solution().maxArea(h);
     return 0;
 }

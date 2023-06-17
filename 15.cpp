@@ -19,22 +19,32 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int> &nums) {
+        if (nums.size() < 3)
+            return {};
         sort(nums.begin(), nums.end());
         vector<vector<int>> ans;
-        for (int i = 0; i < nums.size(); ++i) {
-            int k = nums.size() - 1;
-            int tgt = -nums[i];
-            if (i == 0 || nums[i] != nums[i - 1]) {
-                for (int j = i + 1; j < nums.size(); ++j) {
-                    if (j == i + 1 || nums[j] != nums[j - 1]) {
-                        while (k > j && nums[j] + nums[k] > tgt)
-                            k--;
-                        if (j == k)
-                            break;
-                        if (nums[j] + nums[k] == tgt)
-                            ans.push_back({nums[i], nums[j], nums[k]});
-                    }
-                }
+        int n = nums.size();
+        for (int i = 0; i < n; ++i) {
+            if (nums[i] > 0)
+                return ans;
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            int l = i + 1;
+            int r = n - 1;
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum == 0) {
+                    ans.push_back({nums[i], nums[l], nums[r]});
+                    while (l < r && nums[l] == nums[l + 1])
+                        l++;
+                    while (l < r && nums[r] == nums[r - 1])
+                        r--;
+                    l++;
+                    r--;
+                } else if (sum > 0)
+                    r--;
+                else
+                    l++;
             }
         }
         return ans;
@@ -42,6 +52,7 @@ public:
 };
 
 int main() {
-
+    vector<int> nums = {-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4};
+    Solution().threeSum(nums);
     return 0;
 }
