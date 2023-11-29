@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.26)
 project(LeetCode)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_FLAGS "-std=c11")
+set(CMAKE_C_FLAGS "-std=c17")
 
 include_directories("${PROJECT_BINARY_DIR}")
 

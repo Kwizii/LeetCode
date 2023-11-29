@@ -12,23 +12,20 @@
 #include "map"
 #include "numeric"
 #include "unordered_set"
+#include "unordered_map"
 
 using namespace std;
 
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int ans = 0;
-        int l = 0, r = 0;
+        int i = 0, j = 0, ans = 0;
         unordered_map<char, int> cnt;
-        for (; r < s.size(); r++) {
-            if (cnt.count(s[r]) > 0)
-                cnt[s[r]]++;
-            else
-                cnt[s[r]] = 1;
-            while (cnt[s[r]] > 1)
-                cnt[s[l++]]--;
-            ans = max(ans, r - l + 1);
+        for (; j < s.size(); j++) {
+            cnt[s[j]]++;
+            while (cnt[s[j]] > 1)
+                cnt[s[i++]]--;
+            ans = max(ans, j - i + 1);
         }
         return ans;
     }
