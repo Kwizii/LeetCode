@@ -39,6 +39,7 @@ public:
 };
 
 int main() {
-
+    auto x = Solution().generateParenthesis(3);
+    printf("");
     return 0;
 }

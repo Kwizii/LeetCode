@@ -20,19 +20,14 @@ class Solution {
 public:
     vector<int> dailyTemperatures(vector<int> &temperatures) {
         vector<int> ans(temperatures.size(), 0);
-        vector<int> stk;
+        vector<int> monoStk;
         for (int i = 0; i < temperatures.size(); ++i) {
-            if (stk.empty()) {
-                stk.emplace_back(i);
-                continue;
+            while (!monoStk.empty() && temperatures[monoStk.back()] < temperatures[i]) {
+                int cur = monoStk.back();
+                ans[cur] = i - cur;
+                monoStk.pop_back();
             }
-            while (!stk.empty()) {
-                if (temperatures[stk.back()] >= temperatures[i])
-                    break;
-                ans[stk.back()] = i - stk.back();
-                stk.erase(stk.end() - 1);
-            }
-            stk.emplace_back(i);
+            monoStk.push_back(i);
         }
         return ans;
     }
